@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "CompLib")(type "KiCad")(uri "D:/proj/console/kicadPorj/lib/CompLib.kicad_sym")(options "")(descr ""))
+)

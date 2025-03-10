@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>256 Color Display</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(16, 30px); /* 16 columns */
+            grid-template-rows: repeat(16, 30px); /* 16 rows */
+            gap: 2px;
+        }
+
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>256 Color Display</h1>
+    <div class="color-grid">
+        <!-- Dynamically generate 256 colors -->
+        <!-- The range of RGB values are spaced evenly for all colors and include grayscale -->
+        
+        <!-- Using JavaScript to generate the color boxes -->
+        <script>
+            // Function to generate RGB color codes
+            function generateRGBColors() {
+                const colors = [];
+                for (let r = 0; r < 256; r+= 255/6.349) {
+                    for (let g = 0; g < 256; g+= 255/6.349) {
+                        for (let b = 0; b < 256; b+= 255/6.349) {
+                            if (colors.length < 256) { // Stop once we have 256 colors
+                                colors.push(`rgb(${r}, ${g}, ${b})`);
+                            }
+                        }
+                    }
+                }
+                return colors;
+            }
+
+            const colors = generateRGBColors();
+            const colorGridContainer = document.querySelector('.color-grid');
+
+            // Loop through colors array and add color boxes to the grid
+            colors.forEach(color => {
+                const div = document.createElement('div');
+                div.classList.add('color-box');
+                div.style.backgroundColor = color;
+                colorGridContainer.appendChild(div);
+            });
+        </script>
+    </div>
+</body>
+</html>
