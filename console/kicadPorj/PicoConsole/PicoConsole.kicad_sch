@@ -1814,7 +1814,7 @@
 	)
 	(text "need to add variable resister for bl\nneed the pinion battery shim"
 		(exclude_from_sim no)
-		(at 127 43.18 0)
+		(at 147.574 34.798 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1964,7 +1964,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 133.35) (xy 66.77 133.35)
+			(xy 55.88 166.37) (xy 60.42 166.37)
 		)
 		(stroke
 			(width 0)
@@ -2014,7 +2014,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 113.03) (xy 80.01 113.03)
+			(xy 72.39 146.05) (xy 73.66 146.05)
 		)
 		(stroke
 			(width 0)
@@ -2024,7 +2024,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.77 133.35) (xy 66.77 129.54)
+			(xy 60.42 166.37) (xy 60.42 162.56)
 		)
 		(stroke
 			(width 0)
@@ -2044,7 +2044,7 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 130.81) (xy 69.85 130.81)
+			(xy 64.77 163.83) (xy 63.5 163.83)
 		)
 		(stroke
 			(width 0)
@@ -2054,7 +2054,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 68.58) (xy 72.39 68.58)
+			(xy 68.58 68.58) (xy 86.36 68.58)
 		)
 		(stroke
 			(width 0)
@@ -2071,16 +2071,6 @@
 			(type default)
 		)
 		(uuid "9b0bbe72-a55f-49d7-b1fd-ece3d884de08")
-	)
-	(wire
-		(pts
-			(xy 68.58 53.34) (xy 72.39 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ac7381e1-4b76-48bb-8b3b-b742a4a6273a")
 	)
 	(wire
 		(pts
@@ -2104,6 +2094,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 53.34) (xy 72.39 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c52a0742-78b5-497d-aefa-1a197a9c1864")
+	)
+	(wire
+		(pts
 			(xy 68.58 58.42) (xy 72.39 58.42)
 		)
 		(stroke
@@ -2124,7 +2124,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 116.84) (xy 80.01 116.84)
+			(xy 72.39 149.86) (xy 73.66 149.86)
 		)
 		(stroke
 			(width 0)
@@ -2144,7 +2144,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 129.54) (xy 63.5 129.54)
+			(xy 55.88 162.56) (xy 57.15 162.56)
 		)
 		(stroke
 			(width 0)
@@ -2154,7 +2154,7 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 130.81) (xy 69.85 129.54)
+			(xy 63.5 163.83) (xy 63.5 162.56)
 		)
 		(stroke
 			(width 0)
@@ -2164,7 +2164,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 120.65) (xy 80.01 120.65)
+			(xy 72.39 153.67) (xy 73.66 153.67)
 		)
 		(stroke
 			(width 0)
@@ -2205,6 +2205,28 @@
 		(uuid "053c3892-c954-4540-aece-b32bc3e58c0a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 81.5438 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "SCR_BL"
+		(shape input)
+		(at 72.39 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "06f7fa29-7e5a-499c-b0ab-59e33607c8a8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 82.3904 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2260,7 +2282,7 @@
 	)
 	(global_label "GROUND"
 		(shape output)
-		(at 72.39 68.58 0)
+		(at 86.36 68.58 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2270,7 +2292,7 @@
 		)
 		(uuid "1370add9-f9a7-492e-8d61-250616f252bd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 83.1767 68.58 0)
+			(at 97.1467 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2348,7 +2370,7 @@
 	)
 	(global_label "VCC"
 		(shape input)
-		(at 62.23 129.54 180)
+		(at 55.88 162.56 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2358,7 +2380,7 @@
 		)
 		(uuid "4612e50c-6b25-496b-9e20-899d4f68584a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.6162 129.54 0)
+			(at 49.2662 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2370,7 +2392,7 @@
 	)
 	(global_label "GROUND"
 		(shape output)
-		(at 71.12 130.81 0)
+		(at 64.77 163.83 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2380,7 +2402,7 @@
 		)
 		(uuid "46c1c85c-b6ce-4afc-9242-6474eaf1faa2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.9067 130.81 0)
+			(at 75.5567 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2392,7 +2414,7 @@
 	)
 	(global_label "JOYx"
 		(shape output)
-		(at 80.01 116.84 0)
+		(at 73.66 149.86 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2402,29 +2424,7 @@
 		)
 		(uuid "48aad9d0-0cab-41db-9c52-2fc8e6ba00c0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 87.41 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "SCR_BL"
-		(shape input)
-		(at 72.39 53.34 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "50d0065b-a847-40bf-bd26-c217442f81c1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 82.3904 53.34 0)
+			(at 81.06 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2480,7 +2480,7 @@
 	)
 	(global_label "JOYy"
 		(shape output)
-		(at 62.23 133.35 180)
+		(at 55.88 166.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2490,7 +2490,7 @@
 		)
 		(uuid "5a644d6c-c63d-4380-9d4b-9c99525bbc60")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 54.8905 133.35 0)
+			(at 48.5405 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2546,7 +2546,7 @@
 	)
 	(global_label "VCC"
 		(shape input)
-		(at 80.01 120.65 0)
+		(at 73.66 153.67 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2556,7 +2556,7 @@
 		)
 		(uuid "6bbcd091-2ea9-4491-a570-096ae760b9fa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 86.6238 120.65 0)
+			(at 80.2738 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2612,7 +2612,7 @@
 	)
 	(global_label "GROUND"
 		(shape output)
-		(at 80.01 113.03 0)
+		(at 73.66 146.05 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2622,7 +2622,7 @@
 		)
 		(uuid "93069952-b8a6-4d0e-8a6d-3edbeecf9ae5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 90.7967 113.03 0)
+			(at 84.4467 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2942,7 +2942,7 @@
 	)
 	(symbol
 		(lib_id "CompLib:2djoystick")
-		(at 58.42 109.22 0)
+		(at 52.07 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2951,7 +2951,7 @@
 		(fields_autoplaced yes)
 		(uuid "006344d2-e30e-43c8-b6fa-f2f5f294d1e9")
 		(property "Reference" "AnalogJoystick"
-			(at 66.9925 105.41 0)
+			(at 60.6425 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2959,7 +2959,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 66.9925 107.95 0)
+			(at 60.6425 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2967,7 +2967,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 58.42 109.22 0)
+			(at 52.07 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2976,7 +2976,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 58.42 109.22 0)
+			(at 52.07 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2985,7 +2985,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 58.42 109.22 0)
+			(at 52.07 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)

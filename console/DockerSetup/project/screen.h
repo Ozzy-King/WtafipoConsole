@@ -1,6 +1,7 @@
 #include "hardware/spi.h"
 #include "hardware/gpio.h"
 #include "pico/time.h"
+#include "hardware/pwm.h"
 
 #include "characterFont.h"
 #include "DPRAMmemory.h"
@@ -35,6 +36,15 @@
 //	gpio_init(CSsdcard); 
 //	gpio_put(CSsdcard, 1);
 
+void setPWMForBackLight(uint16_t level){
+	uint slice_num = pwm_gpio_to_slice_num(BL_screen);
+	uint chan_num =  pwm_gpio_to_channel(BL_screen);
+    // Set period of 4 cycles (0 to 3 inclusive)
+    // Set channel A output high for one cycle before dropping
+    pwm_set_chan_level(slice_num, chan_num, level);
+
+}
+
 //initilise pins for chip selecting
 void initScreenPins(){
 	//initilize required pins
@@ -45,14 +55,19 @@ void initScreenPins(){
 	//set chip select high to be inactive
 	gpio_set_dir(CS_screen, GPIO_OUT);
 	gpio_set_dir(DC_screen, GPIO_OUT);
-	gpio_set_dir(BL_screen, GPIO_OUT);
 	gpio_set_dir(RST_screen, GPIO_OUT);
+
+	//set BL to pwm and set it the 1/2 duty
+	gpio_set_function(BL_screen, GPIO_FUNC_PWM);
+	uint slice_num = pwm_gpio_to_slice_num(BL_screen);
+	pwm_set_wrap(slice_num, 16);
+	setPWMForBackLight(8);
+    pwm_set_enabled(slice_num, true);
 
 	gpio_put(RST_screen, 1);
 	gpio_put(CS_screen, 1);
 	gpio_put(DC_screen, command_sel);
-	gpio_put(BL_screen, 1);
-
+	//gpio_put(BL_screen, 1);
 }
 
 void sendCommand_Data(uint8_t cmd, uint8_t* data, size_t len){ //send command then data

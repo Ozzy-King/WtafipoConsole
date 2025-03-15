@@ -34,6 +34,7 @@ target_link_libraries(my_program
 						pico_stdlib
 						hardware_spi
 						hardware_gpio
+						hardware_pwm
 						pico_time
 						pico_platform)
 

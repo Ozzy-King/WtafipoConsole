@@ -40,8 +40,22 @@ uint8_t testSprite[10][10] = {
     {10,60,60,60,60,60,60,60,60,10}
 };
 
-void main(){
+uint8_t test2Sprite[10][10] = {
+    {240,240,94,94,94,94,94,94,240,240},
+    {240,94,94,94,94,94,94,94,94,240},
+    {94,94,94,94,94,94,94,94,94,94},
+    {94,94,94,94,94,94,94,94,94,94},
+    {94,94,94,94,94,94,94,94,94,94},
+    {94,94,94,94,94,94,94,94,94,94},
+    {94,94,94,94,94,94,94,94,94,94},
+    {94,94,94,94,94,94,94,94,94,94},
+    {240,94,94,94,94,94,94,94,94,240},
+    {240,240,94,94,94,94,94,94,240,240}
+};
 
+void main(){
+    int currentRow = 0;
+    int swap = 1;
     //setup
     initSpi0();
 	initScreenPins();
@@ -60,5 +74,19 @@ void main(){
 
     //drawTTY();
 
-    while(1){}
+    while(1){
+        SCREEN_BACKGROUND_ACCESS(8, currentRow) = &testSprite[0][0]; //replace
+        currentRow += swap;//increment
+        if(currentRow == 15){
+            swap = -1;
+        }
+        else if(currentRow == 0){
+            swap = 1;
+        }
+        SCREEN_BACKGROUND_ACCESS(8, currentRow) = &test2Sprite[0][0];//add
+
+        setPWMForBackLight(currentRow);
+        newDraw();
+        sleep_ms(100);
+    }
 }

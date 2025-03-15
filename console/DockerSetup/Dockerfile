@@ -26,4 +26,4 @@ ENV PICO_SDK_PATH=/app/pico-sdk
 
 
 # Set up entry point
-CMD ["bash", "/app/project/build.sh"]
+CMD ["bash", "/app/build.sh"]
