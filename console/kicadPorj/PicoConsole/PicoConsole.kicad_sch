@@ -14,23 +14,23 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at 1.524 -2.286 0)
+			(property "Reference" "AnalogJoystick1"
+				(at 8.5725 3.81 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "~"
+				(at 8.5725 1.27 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Library:2djoystick"
 				(at 0 0 0)
 				(effects
 					(font
@@ -81,7 +81,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -99,7 +99,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -117,7 +117,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -135,7 +135,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -153,7 +153,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -171,7 +171,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -186,23 +186,23 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at -1.778 9.144 0)
+			(property "Reference" "screenConnector1"
+				(at 0.105 13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "~"
+				(at 0.105 11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "MyLibrary:Untitled_3"
 				(at 0 0 0)
 				(effects
 					(font
@@ -253,7 +253,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -271,7 +271,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -289,7 +289,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -307,7 +307,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -325,7 +325,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -343,7 +343,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -361,7 +361,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -379,143 +379,7 @@
 							)
 						)
 					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "CompLib:pushButton"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at 0 -0.254 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "pushButton_0_1"
-				(rectangle
-					(start -4.445 3.175)
-					(end 4.445 -2.54)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "pushButton_1_1"
-				(pin input line
-					(at -7.62 1.27 0)
-					(length 2.8)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -1.27 0)
-					(length 2.8)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 1.27 180)
-					(length 2.8)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 -1.27 180)
-					(length 2.8)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1996,163 +1860,27 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "pushButton_1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at 0 -0.254 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "pushButton_1_0_1"
-				(rectangle
-					(start -4.445 3.175)
-					(end 4.445 -2.54)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "pushButton_1_1_1"
-				(pin input line
-					(at -7.62 1.27 0)
-					(length 2.8)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -1.27 0)
-					(length 2.8)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 1.27 180)
-					(length 2.8)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 -1.27 180)
-					(length 2.8)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "pushButton_2"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at 0 -0.254 0)
+			(property "Reference" "but3"
+				(at 0 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "~"
+				(at 0 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "MyLibrary:Untitled"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2203,7 +1931,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2221,7 +1949,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2239,7 +1967,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2257,7 +1985,7 @@
 							)
 						)
 					)
-					(number ""
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3677,7 +3405,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Library:2djoystick"
 			(at 52.07 142.24 0)
 			(effects
 				(font
@@ -3704,22 +3432,22 @@
 				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "2"
 			(uuid "6a15105d-2553-4514-b6e4-359cb8cc693e")
 		)
-		(pin ""
+		(pin "3"
 			(uuid "f3870724-65dd-4ccf-b146-0ee47dca87db")
 		)
-		(pin ""
+		(pin "5"
 			(uuid "363656ff-1870-4938-bdac-e498b65de9f9")
 		)
-		(pin ""
+		(pin "6"
 			(uuid "cb7e1be0-54ab-44be-a43d-16878f4fa921")
 		)
-		(pin ""
+		(pin "1"
 			(uuid "64e81175-998c-4176-acc5-a33359bfd6cc")
 		)
-		(pin ""
+		(pin "4"
 			(uuid "d495bb48-b345-4a47-b32e-f40cf5db7759")
 		)
 		(instances
@@ -3916,81 +3644,7 @@
 		)
 	)
 	(symbol
-		(lib_name "pushButton_1")
-		(lib_id "CompLib:pushButton")
-		(at 184.15 58.42 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "41c3260b-6b01-44a8-90f3-880b3ecbc38d")
-		(property "Reference" "but2"
-			(at 184.15 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "~"
-			(at 184.15 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 184.15 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 184.15 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 184.15 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "b709efe6-a2b8-41e2-bbb2-171957470e9a")
-		)
-		(pin ""
-			(uuid "43fcebae-71aa-4884-974e-84fc1c54a83a")
-		)
-		(pin ""
-			(uuid "2d4ff472-03da-4b10-91fd-d915498162fb")
-		)
-		(pin ""
-			(uuid "55517417-e1b7-4392-8b12-aaf1507a5571")
-		)
-		(instances
-			(project "PicoConsole"
-				(path "/17013eb7-3c97-44b7-8d8a-b3c93110275d"
-					(reference "but2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
+		(lib_name "pushButton_2")
 		(lib_id "CompLib:pushButton")
 		(at 184.15 46.99 0)
 		(unit 1)
@@ -3999,7 +3653,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "5689dad3-9ec7-466e-9e08-078a767e99a8")
+		(uuid "9c2d3fcf-6ac4-4003-a0f0-b673bdd9a693")
 		(property "Reference" "but1"
 			(at 184.15 40.64 0)
 			(effects
@@ -4016,7 +3670,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MyLibrary:Untitled"
 			(at 184.15 46.99 0)
 			(effects
 				(font
@@ -4043,20 +3697,20 @@
 				(hide yes)
 			)
 		)
-		(pin ""
-			(uuid "723cae89-8181-4707-8906-5f5a9724f7c0")
+		(pin "2"
+			(uuid "443072fb-b3b4-421f-b28c-e2cdb7e502c1")
 		)
-		(pin ""
-			(uuid "5dca645e-3346-491c-9c03-e465d7cbb3ff")
+		(pin "1"
+			(uuid "f6f314ef-517e-48c2-87ca-518dcff8a7a6")
 		)
-		(pin ""
-			(uuid "adca1005-0a46-4fc6-9c51-7da549b034a0")
+		(pin "3"
+			(uuid "156c5142-f725-4976-88be-d7cdb4a9c04a")
 		)
-		(pin ""
-			(uuid "a4734841-8780-41c3-a79e-b188b38d155c")
+		(pin "4"
+			(uuid "170bc800-f327-4b3d-af1a-c4f28e6db663")
 		)
 		(instances
-			(project ""
+			(project "PicoConsole"
 				(path "/17013eb7-3c97-44b7-8d8a-b3c93110275d"
 					(reference "but1")
 					(unit 1)
@@ -4090,7 +3744,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MyLibrary:Untitled_3"
 			(at 62.23 62.23 0)
 			(effects
 				(font
@@ -4117,28 +3771,28 @@
 				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "3"
 			(uuid "bd3dd87e-a328-4c08-b6eb-c6eee5893102")
 		)
-		(pin ""
+		(pin "8"
 			(uuid "12ab37e3-897d-4982-ae66-d777e86af8ca")
 		)
-		(pin ""
+		(pin "5"
 			(uuid "664e23c3-5804-4d49-a053-3b9cad015f43")
 		)
-		(pin ""
+		(pin "2"
 			(uuid "abc8777e-9d95-4b05-abd6-301ffb7cf0a1")
 		)
-		(pin ""
+		(pin "4"
 			(uuid "894ad0ac-ce7e-4bae-9d92-51ee0383af7e")
 		)
-		(pin ""
+		(pin "6"
 			(uuid "6f5c04e8-0ff8-4181-8976-6f9b91a883b4")
 		)
-		(pin ""
+		(pin "1"
 			(uuid "344913cf-8f85-41b4-ab90-58cf42dd4164")
 		)
-		(pin ""
+		(pin "7"
 			(uuid "38f688d0-ef1b-4983-a84d-2aa216afab39")
 		)
 		(instances
@@ -4177,7 +3831,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MyLibrary:Untitled"
 			(at 184.15 69.85 0)
 			(effects
 				(font
@@ -4204,16 +3858,16 @@
 				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "2"
 			(uuid "9bcfdcf4-17d3-4f09-8133-4a7997658335")
 		)
-		(pin ""
+		(pin "1"
 			(uuid "a68da04a-309c-41d8-adc2-217a28c0ea18")
 		)
-		(pin ""
+		(pin "3"
 			(uuid "5179e68d-fa2c-4e61-aefd-e204ba3bdd95")
 		)
-		(pin ""
+		(pin "4"
 			(uuid "a4d4f3ab-2790-4135-8982-9c9648749ca2")
 		)
 		(instances
@@ -4253,7 +3907,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MyLibrary:Untitled_2"
 			(at 233.68 135.382 0)
 			(effects
 				(font
@@ -4323,6 +3977,81 @@
 			(project ""
 				(path "/17013eb7-3c97-44b7-8d8a-b3c93110275d"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "pushButton_2")
+		(lib_id "CompLib:pushButton")
+		(at 184.15 58.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ea8efa79-e130-4757-bc2a-756081b9af58")
+		(property "Reference" "but2"
+			(at 184.15 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 184.15 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MyLibrary:Untitled"
+			(at 184.15 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 184.15 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 184.15 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "85d51632-7bd6-4005-8ee4-a18418ae1649")
+		)
+		(pin "1"
+			(uuid "4d3248a6-f9da-440a-b658-281109f1d61e")
+		)
+		(pin "3"
+			(uuid "ef93856a-417d-4e88-8148-894fb6a7dbbe")
+		)
+		(pin "4"
+			(uuid "d796414f-1ed5-4378-8ba1-d79768b4ac57")
+		)
+		(instances
+			(project "PicoConsole"
+				(path "/17013eb7-3c97-44b7-8d8a-b3c93110275d"
+					(reference "but2")
 					(unit 1)
 				)
 			)

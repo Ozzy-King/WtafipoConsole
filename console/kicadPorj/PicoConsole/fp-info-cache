@@ -1,4 +1,4 @@
-24739089864065745
+24746059884351640
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -6460,20 +6460,6 @@ capacitor tantalum
 0
 2
 2
-CompLib
-2djoystick
-
-
-0
-6
-6
-CompLib
-TactButton
-
-
-0
-4
-1
 Connector
 Banana_Cliff_FCR7350B_S16N-PC_Horizontal
 Cliff single 4mm shrouded banana panel socket, through-hole, horizontal, black, https://www.cliffuk.co.uk/products/testleads/sockets/S16NPC.pdf
@@ -65862,6 +65848,13 @@ Yellow 5381 Series LED
 0
 2
 2
+Library
+2djoystick
+
+
+0
+6
+6
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -68528,6 +68521,41 @@ Right-angle SMD mounting Hardware, inside threaded M3, length 7m, total height 5
 threaded screw
 0
 4
+1
+MyLibrary
+Untitled
+
+
+0
+4
+4
+MyLibrary
+Untitled_1
+
+
+0
+0
+0
+MyLibrary
+Untitled_2
+
+
+0
+13
+13
+MyLibrary
+Untitled_3
+
+
+0
+8
+8
+MyLibrary
+drilledHole
+
+
+0
+1
 1
 NetTie
 NetTie-2_SMD_Pad0.5mm
