@@ -89,7 +89,14 @@ void memorySetup(){
             SCREEN_BACKGROUND_ACCESS(x, y) = NULL;//
 		}
 	}
-
+	
+	//set all dynamic sprites to 0 in x, y and pointer
+	for(uint8_t x = 0; x < DYNAMIC_SPRITE; x++){
+		DYNAMIC_SPRITE_ACCESS(x).posy = 0;
+		DYNAMIC_SPRITE_ACCESS(x).posx = 0;
+		DYNAMIC_SPRITE_ACCESS(x).sprite = NULL;
+	}
+	
     //set colours in the DPRAM
     //reverse byte order so that high byte gets sent first then little byte
     //OG byte order =       Little byte -> high   byte (little endian)

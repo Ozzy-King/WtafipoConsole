@@ -149,9 +149,24 @@ void InitScreen(){
 //     gpio_put(CS_screen, 1); // Deselect the screen
 // }
 
-void drawSprites(){
-	
 
+//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\NEED TO CHECK ALL THIS WORKS PROPERLY 
+//get the the colour at the right position in the sprite
+uint8_t getSpritesColour(uint16_t x, uint16_t y, struct _sprite* spr){
+	x = x - spr->posx;
+	y = y - spr->posy;
+	return SPRITE_ACCESS(spr.sprite, x, y);	
+}
+//finds the first valid sprite. this stops z fighting and order is linear
+int8_t canSpriteBeDrawn(uint16_t x, uint16_t y){
+	for(uint8_t x = 0; x < DYNAMIC_SPRITE; x++){
+		if (DYNAMIC_SPRITE_ACCESS(x).y >= y && DYNAMIC_SPRITE_ACCESS(x).y < y+GRID_HEIGHT){
+			if (DYNAMIC_SPRITE_ACCESS(x).x >= x && DYNAMIC_SPRITE_ACCESS(x).x < x+GRID_WIDTH){
+				return x;
+			}
+		}
+	}
+	return -1;
 }
 
 void newDraw(){
@@ -170,10 +185,16 @@ void newDraw(){
 
 			uint8_t* ch = character[ SCREEN_TTY_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT) ];//get char from tty and point at it
 
-			uint8_t* sprite = SCREEN_BACKGROUND_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT);
+			uint8_t* backgroundSprite = SCREEN_BACKGROUND_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT);
+			int8_t dynamicSpriteIndex = canSpriteBeDrawn(x, y);
 			uint8_t colIndex = 240;
-			if(sprite != NULL){//if sprite is set access  if not keep black
-				colIndex = SPRITE_ACCESS( sprite, x%GRID_WIDTH, y%GRID_HEIGHT );
+			
+			if(backgroundSprite != NULL){//if sprite is set access  if not keep black
+				colIndex = SPRITE_ACCESS( backgroundSprite, x%GRID_WIDTH, y%GRID_HEIGHT );
+			}
+			if(dynamicSpriteIndex){
+				struct _sprite* dynamicSprite = &DYNAMIC_SPRITE_ACCESS(dynamicSpriteIndex);
+				colIndex = getSpritesColour(x, y, dynamicSprite);
 			}
 			if(ch[targety] & targetx){//if the charater is bigger than 0
 				colIndex = 240;
