@@ -37,6 +37,12 @@ const uint16_t colour_palette[256] = {
 };
 
 
+struct _sprite{
+    uint16_t posy;
+    uint16_t posx;
+    uint8_t* sprite;
+};
+
 //scary memory things
 
 //used for storing functino pointers
@@ -65,6 +71,11 @@ const uint16_t colour_palette[256] = {
 #define COLOUR_LEN 256
 #define COLOURS ((uint16_t*)0x50100AC8)
 #define COLOUR_ACCESS(x) (*(COLOURS + x))
+
+#define DYNAMIC_SPRITE 103
+#define DYNAMIC_SPRITE ((struct _sprite*)0x50100CC8)
+#define DYNAMIC_SPRITE_ACCESS(x) ( *(DYNAMIC_SPRITE + x) )
+
 
 #define SPRITE_ACCESS(s, x, y) (*(s + (y*10) + x))
 //the rest is sprite data which should be 8bytes (4bytes = sprite address, 2*16bytes for x y)

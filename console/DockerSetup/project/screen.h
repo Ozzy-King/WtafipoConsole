@@ -149,6 +149,11 @@ void InitScreen(){
 //     gpio_put(CS_screen, 1); // Deselect the screen
 // }
 
+void drawSprites(){
+	
+
+}
+
 void newDraw(){
 	uint8_t cmd = RAMWR;
 
