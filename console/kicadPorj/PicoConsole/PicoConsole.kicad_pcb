@@ -7,6 +7,12 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "WTAIFIPO")
+		(date "2025-03-20")
+		(rev "1")
+		(company "Ozzys")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" signal)
@@ -41,7 +47,7 @@
 			(layerselection 0x00000000_00000000_55555555_5755f5ff)
 			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
 			(disableapertmacros no)
-			(usegerberextensions no)
+			(usegerberextensions yes)
 			(usegerberattributes yes)
 			(usegerberadvancedattributes yes)
 			(creategerberjobfile yes)
@@ -73,9 +79,9 @@
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "Output/")
 		)
 	)
 	(net 0 "")
@@ -130,7 +136,7 @@
 		(uuid "5214d4d1-1d12-4408-aac9-77b16fd5193e")
 		(at 78.75 98.75)
 		(property "Reference" "but2"
-			(at 0 -0.5 0)
+			(at -0.25 -4.25 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "c8e1f246-7c7a-4997-aaf8-6d5c879abf62")
@@ -258,7 +264,7 @@
 		(uuid "6f02d3f9-51ce-4ecf-a71c-faa175d3d834")
 		(at 68.5 54)
 		(property "Reference" "screenConnector1"
-			(at 0 -0.5 0)
+			(at 8 -3.5 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "0a1e6ec3-6fbe-4619-8be9-9f646dc20cf1")
@@ -312,7 +318,7 @@
 		(sheetfile "PicoConsole.kicad_sch")
 		(attr smd)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.5 0)
+			(at 8 -2 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "a8c4cacc-e00c-4f02-a5bb-30b8deed7d80")
@@ -418,7 +424,7 @@
 		(uuid "842a147a-cbe0-488f-8081-dc4ea5c03cd2")
 		(at 72.25 88.75)
 		(property "Reference" "but1"
-			(at 0 -0.5 0)
+			(at 0 -4.25 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "de73879f-5469-41e2-8ae6-afdfd1bfcef9")
@@ -558,7 +564,7 @@
 			)
 		)
 		(property "Value" "drilledHole"
-			(at 0 1 0)
+			(at -6.15 1 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "ac6a553f-b63d-45b5-8d07-625d41e231f0")
@@ -635,7 +641,7 @@
 			)
 		)
 		(property "Value" "drilledHole"
-			(at 0 1 0)
+			(at 6.65 0.85 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "7754010a-f252-42e2-85ea-98fc5f2fb511")
@@ -674,7 +680,7 @@
 		)
 		(attr smd)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.5 0)
+			(at 1.15 3.85 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "eea918f8-65e0-401d-b4c3-6d1b2df5eec1")
@@ -700,7 +706,7 @@
 		(uuid "b6e727dd-8873-45af-b06d-dfd3082e24e2")
 		(at 84.75 88.75)
 		(property "Reference" "but3"
-			(at 0 -0.5 0)
+			(at 0.25 -3.75 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "5a329f6d-32e0-4536-a980-4b8415f6b3a8")
@@ -828,7 +834,7 @@
 		(uuid "cf80fc87-342c-4811-81b7-96a193179e04")
 		(at 126.65 91.5)
 		(property "Reference" "AnalogJoystick1"
-			(at 0 -0.5 0)
+			(at 10.35 6 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "5627d085-469a-47d3-bb0d-5b03fe715b30")
@@ -882,7 +888,7 @@
 		(sheetfile "PicoConsole.kicad_sch")
 		(attr smd)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.5 0)
+			(at 10.35 7.5 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "e3701994-3e25-4ef1-ba88-b04776b7494d")
@@ -979,7 +985,7 @@
 			)
 		)
 		(property "Value" "SD_Card_Receptacle"
-			(at 0 -1 0)
+			(at 0 -4.5 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "3605e8b9-f177-463d-a272-2bb2b6491a78")

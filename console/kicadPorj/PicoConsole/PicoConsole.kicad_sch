@@ -1997,16 +1997,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "need to add variable resister for bl\nneed the pinion battery shim"
-		(exclude_from_sim no)
-		(at 147.574 34.798 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "ca0d3904-7878-477a-8b29-de086c1cdb38")
-	)
 	(wire
 		(pts
 			(xy 110.49 133.35) (xy 113.03 133.35)
