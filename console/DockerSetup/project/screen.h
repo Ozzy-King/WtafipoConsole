@@ -148,21 +148,53 @@ void InitScreen(){
 
 //     gpio_put(CS_screen, 1); // Deselect the screen
 // }
+void printNumber(uint64_t num, uint8_t row, uint8_t col){
+    uint8_t c= col;
+    while(num != 0){
+        uint t = num - ((num/10)*10);
 
+        SCREEN_TTY_ACCESS(c, row) = (t+48);
+
+        num /= 10;
+        c++;
+    }
+}
+void printNumberSigned(int64_t num, uint8_t row, uint8_t col){
+    uint8_t c= col;
+    while(num != 0){
+        int t = num - ((num/10)*10);
+
+        SCREEN_TTY_ACCESS(c, row) = (t+48);
+
+        num /= 10;
+        c++;
+    }
+}
+void printString(uint8_t* str, uint8_t row, uint8_t col){
+    uint8_t c = 0;
+    while(str[c] != '\0'){
+        SCREEN_TTY_ACCESS(col, row) = (str[c]);
+        c++;
+        col++;
+    }
+}
 
 //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\NEED TO CHECK ALL THIS WORKS PROPERLY 
 //get the the colour at the right position in the sprite
 uint8_t getSpritesColour(uint16_t x, uint16_t y, struct _sprite* spr){
-	x = x - spr->posx;
-	y = y - spr->posy;
-	return SPRITE_ACCESS(spr.sprite, x, y);	
+	x = x - spr->x;
+	y = y - spr->y;
+	return SPRITE_ACCESS(spr->sprite, x, y);	
 }
 //finds the first valid sprite. this stops z fighting and order is linear
 int8_t canSpriteBeDrawn(uint16_t x, uint16_t y){
-	for(uint8_t x = 0; x < DYNAMIC_SPRITE; x++){
-		if (DYNAMIC_SPRITE_ACCESS(x).y >= y && DYNAMIC_SPRITE_ACCESS(x).y < y+GRID_HEIGHT){
-			if (DYNAMIC_SPRITE_ACCESS(x).x >= x && DYNAMIC_SPRITE_ACCESS(x).x < x+GRID_WIDTH){
-				return x;
+	for(uint8_t i = 0; i < DYNAMIC_SPRITE_LEN; i++){
+		struct _sprite* spr = &(DYNAMIC_SPRITE_ACCESS(i));
+		if (spr->y >= y && spr->y < y+GRID_HEIGHT) {
+			if (spr->x >= x && spr->x < x+GRID_WIDTH) {
+				if(spr->sprite != NULL){
+					return i;
+				}
 			}
 		}
 	}
@@ -181,23 +213,24 @@ void newDraw(){
 
 		for(uint16_t x = 0; x < SCREEN_WIDTH; x++){
 			//target x y for tty character
-			uint8_t targetx = 0x80 >> ((x% GRID_WIDTH) * CHARACTER_WIDTH )/GRID_WIDTH; //get x target in tty font character
+			uint8_t targetx = 0x80 >> (((x% GRID_WIDTH) * CHARACTER_WIDTH )/GRID_WIDTH); //get x target in tty font character
 
 			uint8_t* ch = character[ SCREEN_TTY_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT) ];//get char from tty and point at it
 
 			uint8_t* backgroundSprite = SCREEN_BACKGROUND_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT);
 			int8_t dynamicSpriteIndex = canSpriteBeDrawn(x, y);
+
 			uint8_t colIndex = 240;
 			
 			if(backgroundSprite != NULL){//if sprite is set access  if not keep black
 				colIndex = SPRITE_ACCESS( backgroundSprite, x%GRID_WIDTH, y%GRID_HEIGHT );
 			}
-			if(dynamicSpriteIndex){
+			if(dynamicSpriteIndex != -1){
 				struct _sprite* dynamicSprite = &DYNAMIC_SPRITE_ACCESS(dynamicSpriteIndex);
 				colIndex = getSpritesColour(x, y, dynamicSprite);
 			}
 			if(ch[targety] & targetx){//if the charater is bigger than 0
-				colIndex = 240;
+				colIndex = 255;
 			}
 			spi_write_blocking(spi0, (uint8_t*)&COLOUR_ACCESS(colIndex), 2);
 			

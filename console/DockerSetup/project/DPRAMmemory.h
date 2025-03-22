@@ -38,8 +38,8 @@ const uint16_t colour_palette[256] = {
 
 
 struct _sprite{
-    uint16_t posy;
-    uint16_t posx;
+    uint16_t y;
+    uint16_t x;
     uint8_t* sprite;
 };
 
@@ -72,7 +72,7 @@ struct _sprite{
 #define COLOURS ((uint16_t*)0x50100AC8)
 #define COLOUR_ACCESS(x) (*(COLOURS + x))
 
-#define DYNAMIC_SPRITE 103
+#define DYNAMIC_SPRITE_LEN 103
 #define DYNAMIC_SPRITE ((struct _sprite*)0x50100CC8)
 #define DYNAMIC_SPRITE_ACCESS(x) ( *(DYNAMIC_SPRITE + x) )
 
@@ -91,9 +91,9 @@ void memorySetup(){
 	}
 	
 	//set all dynamic sprites to 0 in x, y and pointer
-	for(uint8_t x = 0; x < DYNAMIC_SPRITE; x++){
-		DYNAMIC_SPRITE_ACCESS(x).posy = 0;
-		DYNAMIC_SPRITE_ACCESS(x).posx = 0;
+	for(uint8_t x = 0; x < DYNAMIC_SPRITE_LEN; x++){
+		DYNAMIC_SPRITE_ACCESS(x).y = 0;
+		DYNAMIC_SPRITE_ACCESS(x).x = 0;
 		DYNAMIC_SPRITE_ACCESS(x).sprite = NULL;
 	}
 	

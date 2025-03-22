@@ -7,25 +7,7 @@
 
 #include "DPRAMmemory.h"
 
-void printNumber(uint64_t num, uint8_t row, uint8_t col){
-    uint8_t c= col;
-    while(num != 0){
-        uint t = num - ((num/10)*10);
 
-        SCREEN_TTY_ACCESS(row, c) = (t+48);
-
-        num /= 10;
-        c++;
-    }
-}
-void printString(uint8_t* str, uint8_t row, uint8_t col){
-    uint8_t c = 0;
-    while(str[c] != '\0'){
-        SCREEN_TTY_ACCESS(col, row) = (str[c]);
-        c++;
-        col++;
-    }
-}
 
 uint8_t testSprite[10][10] = {
     {10,80,80,80,80,80,80,80,80,10},
@@ -62,12 +44,13 @@ void main(){
     memorySetup();
     InitScreen();
 
-    uint8_t* str = "!!Hallo End??";
+    uint8_t* str = "  Hallo End??";
 
     for(int y = 0; y < 16; y++)
         for(int x = 0; x < 16; x++)
             SCREEN_BACKGROUND_ACCESS(x ,y) = &testSprite[0][0];
     
+    DYNAMIC_SPRITE_ACCESS(0).sprite = &test2Sprite[0][0]; //replace    
     printString(str, 0, 0);
     newDraw();
 
@@ -75,17 +58,14 @@ void main(){
     //drawTTY();
 
     while(1){
-        SCREEN_BACKGROUND_ACCESS(8, currentRow) = &testSprite[0][0]; //replace
-        currentRow += swap;//increment
-        if(currentRow == 15){
-            swap = -1;
-        }
-        else if(currentRow == 0){
-            swap = 1;
-        }
-        SCREEN_BACKGROUND_ACCESS(8, currentRow) = &test2Sprite[0][0];//add
+        //DYNAMIC_SPRITE_ACCESS(0).y += swap;//increment
+        //if(DYNAMIC_SPRITE_ACCESS(0).y == 40){
+        //    swap = -1;
+        //}
+        //else if(DYNAMIC_SPRITE_ACCESS(0).y == 0){
+        //    swap = 1;
+        //}
 
-        setPWMForBackLight(currentRow);
         newDraw();
         sleep_ms(100);
     }
