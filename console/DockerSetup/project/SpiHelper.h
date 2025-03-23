@@ -14,8 +14,8 @@
 #define spiOut 3
 #define spiIn 4
 
-#define Baudrate 20000000
-
+//#define Baudrate 40000000
+#define Baudrate 60000000
 uint initSpi0(){
 	uint ret = 0;
 	//initilize required pins
@@ -27,11 +27,13 @@ uint initSpi0(){
     gpio_set_dir(spiOut, GPIO_OUT); 
     gpio_set_dir(spiIn, GPIO_IN); 
 	
+	//gpio_set_drive_strength(spiClk, GPIO_DRIVE_STRENGTH_12MA);
+
 	//init and set baudrate of spi
 #ifdef DEBUG
 	initBoardLED();//if debug turn on led it succesful
 	ret = spi_init(spi0, Baudrate);
-	if(ret < Baudrate){
+	if(ret >= Baudrate){
 		showLED();
 	}
 #else

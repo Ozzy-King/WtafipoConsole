@@ -20,6 +20,7 @@ pico_set_linker_script(my_program ${CMAKE_CURRENT_LIST_DIR}/memmap_custom.ld)
 
 # Optimize for smallest size
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os ")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -mcpu=cortex-m0plus -mthumb")
 
 
 
@@ -36,7 +37,8 @@ target_link_libraries(my_program
 						hardware_gpio
 						hardware_pwm
 						pico_time
-						pico_platform)
+						pico_platform
+						pico_multicore)
 
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(my_program)

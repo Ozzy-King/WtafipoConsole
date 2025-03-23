@@ -25,7 +25,6 @@
 #define TTY_WIDTH 32
 #define TTY_HEIGHT 17
 
-
 //dpram
 //the address to tty get place in flash as it shouldnt change the actual data will be stored else where
 //uint8_t screen_tty[TTY_HEIGHT][TTY_WIDTH] __attribute__((section(".dpram")));
@@ -102,6 +101,7 @@ void sendCommand_Data(uint8_t cmd, uint8_t* data, size_t len){ //send command th
 #define INVOFF 0x20
 
 void InitScreen(){
+
 	uint8_t RASETDATA[] = {0x00, 0x23, 0x00, 0xCC};//offseted by 34
 	uint8_t CASETDATA[] = {0x00, 0x00, 0x01, 0x40};
 	uint8_t data = 0x55;
@@ -148,21 +148,10 @@ void InitScreen(){
 
 //     gpio_put(CS_screen, 1); // Deselect the screen
 // }
-void printNumber(uint64_t num, uint8_t row, uint8_t col){
+void printNumber(uint32_t num, uint8_t row, uint8_t col){
     uint8_t c= col;
     while(num != 0){
         uint t = num - ((num/10)*10);
-
-        SCREEN_TTY_ACCESS(c, row) = (t+48);
-
-        num /= 10;
-        c++;
-    }
-}
-void printNumberSigned(int64_t num, uint8_t row, uint8_t col){
-    uint8_t c= col;
-    while(num != 0){
-        int t = num - ((num/10)*10);
 
         SCREEN_TTY_ACCESS(c, row) = (t+48);
 
@@ -187,18 +176,28 @@ uint8_t getSpritesColour(uint16_t x, uint16_t y, struct _sprite* spr){
 	return SPRITE_ACCESS(spr->sprite, x, y);	
 }
 //finds the first valid sprite. this stops z fighting and order is linear
-int8_t canSpriteBeDrawn(uint16_t x, uint16_t y){
-	for(uint8_t i = 0; i < DYNAMIC_SPRITE_LEN; i++){
-		struct _sprite* spr = &(DYNAMIC_SPRITE_ACCESS(i));
-		if (spr->y >= y && spr->y < y+GRID_HEIGHT) {
-			if (spr->x >= x && spr->x < x+GRID_WIDTH) {
-				if(spr->sprite != NULL){
-					return i;
-				}
-			}
+struct _sprite* canSpriteBeDrawn(uint16_t x, uint16_t y){
+	struct _sprite* spr = DYNAMIC_SPRITE_LIST_START;
+	while(spr != NULL){
+		if (spr->sprite != NULL &&
+			y >= spr->y && y < spr->y+GRID_HEIGHT &&
+			x >= spr->x && x < spr->x+GRID_WIDTH){
+			
+			return spr;
 		}
+		spr = spr->nextSpr;
 	}
-	return -1;
+
+	// for(uint8_t i = 0; i < DYNAMIC_SPRITE_LEN; i++){//go thruhg e
+	// 	struct _sprite* spr = &(DYNAMIC_SPRITE_ACCESS(i));
+	// 	if (spr->sprite != NULL &&
+	// 		y >= spr->y && y < spr->y+GRID_HEIGHT &&
+	// 		x >= spr->x && x < spr->x+GRID_WIDTH){
+			
+	// 		return i;
+	// 	}
+	// }
+	return NULL;
 }
 
 void newDraw(){
@@ -213,20 +212,19 @@ void newDraw(){
 
 		for(uint16_t x = 0; x < SCREEN_WIDTH; x++){
 			//target x y for tty character
-			uint8_t targetx = 0x80 >> (((x% GRID_WIDTH) * CHARACTER_WIDTH )/GRID_WIDTH); //get x target in tty font character
+			uint8_t targetx = 0x80 >> (((x % GRID_WIDTH) * CHARACTER_WIDTH )/GRID_WIDTH); //get x target in tty font character
 
 			uint8_t* ch = character[ SCREEN_TTY_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT) ];//get char from tty and point at it
 
 			uint8_t* backgroundSprite = SCREEN_BACKGROUND_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT);
-			int8_t dynamicSpriteIndex = canSpriteBeDrawn(x, y);
+			struct _sprite* dynamicSprite = canSpriteBeDrawn(x, y);//check to see if sprite can be drawn, returns index else -1
 
 			uint8_t colIndex = 240;
 			
 			if(backgroundSprite != NULL){//if sprite is set access  if not keep black
-				colIndex = SPRITE_ACCESS( backgroundSprite, x%GRID_WIDTH, y%GRID_HEIGHT );
+				colIndex = SPRITE_ACCESS( backgroundSprite, x % GRID_WIDTH, y % GRID_HEIGHT );
 			}
-			if(dynamicSpriteIndex != -1){
-				struct _sprite* dynamicSprite = &DYNAMIC_SPRITE_ACCESS(dynamicSpriteIndex);
+			if(dynamicSprite != NULL){
 				colIndex = getSpritesColour(x, y, dynamicSprite);
 			}
 			if(ch[targety] & targetx){//if the charater is bigger than 0

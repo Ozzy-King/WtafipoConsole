@@ -41,6 +41,7 @@ struct _sprite{
     uint16_t y;
     uint16_t x;
     uint8_t* sprite;
+    struct _sprite* nextSpr;
 };
 
 //scary memory things
@@ -72,10 +73,17 @@ struct _sprite{
 #define COLOURS ((uint16_t*)0x50100AC8)
 #define COLOUR_ACCESS(x) (*(COLOURS + x))
 
-#define DYNAMIC_SPRITE_LEN 103
+#define DYNAMIC_SPRITE_LEN 68
 #define DYNAMIC_SPRITE ((struct _sprite*)0x50100CC8)
 #define DYNAMIC_SPRITE_ACCESS(x) ( *(DYNAMIC_SPRITE + x) )
 
+//as a reminder thisis the start of the linked this. the address at this addres is the first sprite
+#define DYNAMIC_SPRITE_LIST_START (*((struct _sprite**)0x50100FF8))
+
+#define TEMP_DATA_LEN 8
+#define TEMP_DATA ((uint8_t*)0x50100FFC)
+#define TEMP_DATA_ACCESS(x) (*(TEMP_DATA + x))
+#define TEMP_DATA_ACCESS_AS(type, x) (*(((type*)0x50100FFC) + x))
 
 #define SPRITE_ACCESS(s, x, y) (*(s + (y*10) + x))
 //the rest is sprite data which should be 8bytes (4bytes = sprite address, 2*16bytes for x y)
@@ -95,6 +103,7 @@ void memorySetup(){
 		DYNAMIC_SPRITE_ACCESS(x).y = 0;
 		DYNAMIC_SPRITE_ACCESS(x).x = 0;
 		DYNAMIC_SPRITE_ACCESS(x).sprite = NULL;
+        DYNAMIC_SPRITE_ACCESS(x).nextSpr = NULL;
 	}
 	
     //set colours in the DPRAM
@@ -108,5 +117,42 @@ void memorySetup(){
     }
 
 }
+
+
+//reverse this start at bottom of sprite list and work up
+//update data sprite list so all sprites are connected in linked list
+void spriteListUpdate(){
+    DYNAMIC_SPRITE_LIST_START = NULL;
+    for(int8_t i = DYNAMIC_SPRITE_LEN-1; i >= 0 ; i--){
+        if(DYNAMIC_SPRITE_ACCESS(i).sprite != NULL){ //check if current the sprite is active
+            DYNAMIC_SPRITE_ACCESS(i).nextSpr = DYNAMIC_SPRITE_LIST_START;
+            DYNAMIC_SPRITE_LIST_START = &DYNAMIC_SPRITE_ACCESS(i);
+        }else{
+            //DYNAMIC_SPRITE_ACCESS(i).nextSpr = NULL;
+        }
+    }
+}
+
+
+//reverse this start at bottom of sprite list and work up
+//update data sprite list so all sprites are connected in linked list
+/*    void spriteListUpdate(){
+        TEMP_DATA_ACCESS_AS(struct _sprite*, 0) = NULL;
+        for(uint8_t i = 0; i < DYNAMIC_SPRITE_LEN; i++){
+            if(DYNAMIC_SPRITE_ACCESS(i).sprite != NULL){ //check if current the sprite is active
+                if(TEMP_DATA_ACCESS_AS(struct _sprite*, 0) != NULL){//check if there is a previous sprite
+                    (*TEMP_DATA_ACCESS_AS(struct _sprite*, 0)).nextSpr = &DYNAMIC_SPRITE_ACCESS(i); //set the prvious dynamic->next_sprite to this sprites address
+                }
+                else{//if there is no prvious then this is first and store to find first sprite
+                    DYNAMIC_SPRITE_LIST_START = &DYNAMIC_SPRITE_ACCESS(i);
+                }
+                TEMP_DATA_ACCESS_AS(struct _sprite*, 0) = &DYNAMIC_SPRITE_ACCESS(i);//set this in temp data to access next look.
+            }
+            else{ //possibly dont need this one
+                DYNAMIC_SPRITE_ACCESS(i).nextSpr = NULL;
+            }
+        }
+    }*/
+
 
 #endif
