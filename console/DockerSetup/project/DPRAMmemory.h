@@ -47,10 +47,12 @@ struct _sprite{
 //scary memory things
 
 //used for storing functino pointers
-#define FUNCTION_LEN 10
+#define FUNCTION_LEN 4
 #define FUNCTIONS ((void*)0x50100000)
 #define FUNCTION_ACCESS(x) ( *(FUNCTIONS + (x * sizeof(void*))) )
 
+#define CELLROWCOLOURBUFFER ((uint16_t*)0x50100010)
+#define CELLROWCOLOURBUFFER_ACCESS(x) (*(CELLROWCOLOURBUFFER + x))
 
 //memory start for tty
 #define TTY_WIDTH 32
@@ -58,8 +60,6 @@ struct _sprite{
 
 #define SCREEN_TTY ((uint8_t*)0x50100028)
 #define SCREEN_TTY_ACCESS(x, y) (*(SCREEN_TTY + (y * TTY_WIDTH) + x))
-
-
 
 //memory start for background sprites
 #define BACKGROUND_WIDTH 32
@@ -115,7 +115,6 @@ void memorySetup(){
         (*((uint8_t*)COLOURS + (i+1) )) = *((uint8_t*)colour_palette +  i);
         //COLOUR_ACCESS(i) = colour_palette[i];
     }
-
 }
 
 

@@ -175,6 +175,9 @@ uint8_t getSpritesColour(uint16_t x, uint16_t y, struct _sprite* spr){
 	y = y - spr->y;
 	return SPRITE_ACCESS(spr->sprite, x, y);	
 }
+
+////--------------------------------------------------------------this sprite find is really slow--------------------------------------
+////--------------------------------------------------------------before the render find all the grids the sprites are in
 //finds the first valid sprite. this stops z fighting and order is linear
 struct _sprite* canSpriteBeDrawn(uint16_t x, uint16_t y){
 	struct _sprite* spr = DYNAMIC_SPRITE_LIST_START;
@@ -200,75 +203,119 @@ struct _sprite* canSpriteBeDrawn(uint16_t x, uint16_t y){
 	return NULL;
 }
 
+static const uint8_t LUT [10] = {0, 1, 2, 3, 3, 4, 4, 5, 6, 7};
+void newerDraw(){
+	uint8_t cmd = RAMWR;
+
+	uint8_t* ch;
+	uint8_t* backgroundSprite;
+	uint8_t fully;
+	uint16_t alongX;
+	
+	uint8_t colIndex = 240;
+	
+	struct _sprite* dynamicSprite = NULL;
+	
+	uint8_t targetx;
+	uint8_t targety;
+    
+	gpio_put(CS_screen, 0); // Select the screen
+    gpio_put(DC_screen, command_sel);
+    spi_write_blocking(spi0, &cmd, 1); // Send command
+    gpio_put(DC_screen, data_sel);
+
+
+	for(uint8_t gh = 0; gh < TTY_HEIGHT; gh++){//looks the gridheight
+		for(uint8_t celly = 0; celly < GRID_HEIGHT; celly++){
+			fully = gh*GRID_HEIGHT+celly;
+			targety = LUT[celly];//get the y target in the tty font character
+
+			for(uint8_t gw = 0; gw < TTY_WIDTH; gw++){
+				alongX = gw*GRID_WIDTH;
+				//get the tty character
+				ch = character[ SCREEN_TTY_ACCESS(gw, gh) ];//get char from tty and point at it
+				//get the background
+				backgroundSprite = SCREEN_BACKGROUND_ACCESS(gw, gh);
+			
+				for(uint8_t cellx = 0; cellx < GRID_WIDTH; cellx++){
+					//get a sprite
+					targetx = 0x80 >> LUT[cellx];
+					dynamicSprite = canSpriteBeDrawn(alongX+cellx, fully);//check to see if sprite can be drawn, returns index else -1
+					if(ch[targety] & targetx){//if the charater is bigger than 0
+						colIndex = 255;
+					}
+					else if(dynamicSprite != NULL){
+						colIndex = getSpritesColour(alongX+cellx, fully, dynamicSprite);
+					}
+					else if(backgroundSprite != NULL){//if sprite is set access  if not keep black
+						colIndex = SPRITE_ACCESS( backgroundSprite, cellx, celly );
+					}else {
+						colIndex = 240;
+					}
+					CELLROWCOLOURBUFFER_ACCESS(cellx) = COLOUR_ACCESS(colIndex);
+					//spi_write_blocking(spi0, (uint8_t*)&COLOUR_ACCESS(colIndex), 2);
+				}
+				spi_write_blocking(spi0, (uint8_t*)CELLROWCOLOURBUFFER, 20);
+			}
+		}
+	}
+	gpio_put(CS_screen, 1); // deSelect the screen
+}
+
 void newDraw(){
 	uint8_t cmd = RAMWR;
+
+	uint8_t colIndex = 240;
+	uint8_t ymod;
+	uint8_t xmod;
+	uint8_t ydiv;
+	uint8_t xdiv;
+
+	//static uint8_t flipper;
+	//flipper = !flipper;
 
     gpio_put(CS_screen, 0); // Select the screen
     gpio_put(DC_screen, command_sel);
     spi_write_blocking(spi0, &cmd, 1); // Send command
     gpio_put(DC_screen, data_sel);
 	for(uint16_t y = 0; y < SCREEN_HEIGHT;y++){
-		uint8_t targety = ((y % GRID_HEIGHT) * CHARACTER_HEIGHT) / GRID_HEIGHT;//get the y target in the tty font character
+		 ymod = y % GRID_HEIGHT;
+		 ydiv = y / GRID_HEIGHT;
+
+		uint8_t targety = ((ymod) * CHARACTER_HEIGHT) / GRID_HEIGHT;//get the y target in the tty font character
 
 		for(uint16_t x = 0; x < SCREEN_WIDTH; x++){
-			//target x y for tty character
-			uint8_t targetx = 0x80 >> (((x % GRID_WIDTH) * CHARACTER_WIDTH )/GRID_WIDTH); //get x target in tty font character
+			 colIndex = 240;
+			//if(flipper){
+				xmod = x % GRID_WIDTH;
+				xdiv = x/GRID_WIDTH;
+				//target x y for tty character
+				uint8_t targetx = 0x80 >> (((xmod) * CHARACTER_WIDTH )/GRID_WIDTH); //get x target in tty font character
 
-			uint8_t* ch = character[ SCREEN_TTY_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT) ];//get char from tty and point at it
+				uint8_t* ch = character[ SCREEN_TTY_ACCESS(xdiv, ydiv) ];//get char from tty and point at it
 
-			uint8_t* backgroundSprite = SCREEN_BACKGROUND_ACCESS(x/GRID_WIDTH, y/GRID_HEIGHT);
-			struct _sprite* dynamicSprite = canSpriteBeDrawn(x, y);//check to see if sprite can be drawn, returns index else -1
+				uint8_t* backgroundSprite = SCREEN_BACKGROUND_ACCESS(xdiv, ydiv);
+				struct _sprite* dynamicSprite = canSpriteBeDrawn(x, y);//check to see if sprite can be drawn, returns index else -1
 
-			uint8_t colIndex = 240;
-			
-			if(backgroundSprite != NULL){//if sprite is set access  if not keep black
-				colIndex = SPRITE_ACCESS( backgroundSprite, x % GRID_WIDTH, y % GRID_HEIGHT );
-			}
-			if(dynamicSprite != NULL){
-				colIndex = getSpritesColour(x, y, dynamicSprite);
-			}
-			if(ch[targety] & targetx){//if the charater is bigger than 0
-				colIndex = 255;
-			}
+				//uint8_t colIndex = 240;
+				
+				if(backgroundSprite != NULL){//if sprite is set access  if not keep black
+					colIndex = SPRITE_ACCESS( backgroundSprite, xmod, ymod );
+				}
+				if(dynamicSprite != NULL){
+					colIndex = getSpritesColour(x, y, dynamicSprite);
+				}
+				if(ch[targety] & targetx){//if the charater is bigger than 0
+					colIndex = 255;
+				}
+			//}
 			spi_write_blocking(spi0, (uint8_t*)&COLOUR_ACCESS(colIndex), 2);
-			
 		}
+		//flipper = !flipper;
 	}
 	gpio_put(CS_screen, 1); // deSelect the screen
 
 }
-
-
-// void drawTTY(){
-// 	uint8_t cmd = RAMWR;
-// 	uint8_t colour[2];
-//     gpio_put(CS_screen, 0); // Select the screen
-//     gpio_put(DC_screen, command_sel);
-//     spi_write_blocking(spi0, &cmd, 1); // Send command
-//     gpio_put(DC_screen, data_sel);
-// 	//screen_tty
-// 	for (uint8_t j = 0; j < SCREEN_HEIGHT; j++) {//height 
-//         for (uint8_t i = 0; i < SCREEN_WIDTH/GRID_WIDTH; i++) { //width tty
-// 			//each square is 10x10
-			
-// 			uint8_t* ch = character[SCREEN_TTY_ACCESS(j/GRID_HEIGHT,i)];//get char from tty and point at it
-// 			uint8_t targety = ((j % GRID_HEIGHT) * CHARACTER_HEIGHT) / GRID_HEIGHT;
-
-// 			for(int x = 0; x < GRID_WIDTH; x++){ //dras just the row
-// 				uint8_t targetx = 0x80 >> (x * CHARACTER_WIDTH )/GRID_WIDTH;
-// 				if(ch[targety] & targetx){
-// 					colour[0] = 0xff; colour[1] = 0xff;
-// 				}else{
-// 					colour[0] = 0x00; colour[1] = 0x00;
-// 				}
-// 				spi_write_blocking(spi0, colour, 2);
-// 			}
-// 			//get with number - which row which column
-// 		}
-		
-// 	}
-
-// }
 
 
 void DrawScreenSaver()	{
